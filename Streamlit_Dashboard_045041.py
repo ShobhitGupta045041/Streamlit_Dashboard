@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import pandas as pd
 import streamlit as st
 import altair as alt
@@ -39,17 +33,13 @@ selected_warehouses = st.sidebar.multiselect('Select Warehouse Codes', df['Wareh
 # Slicer for Sales Channel with multi-select option (in the sidebar)
 selected_sales_channels = st.sidebar.multiselect('Select Sales Channels', df['SalesChannel'].unique())
 
-# Slicer for Another Filter (replace 'ColumnName' with the actual column name)
-selected_another_filter = st.sidebar.multiselect('Select Order Date', df['OrderDate'].unique())
-
 # Check if filters are empty, and use the original DataFrame if they are
-if not selected_warehouses and not selected_sales_channels and not selected_another_filter:
+if not selected_warehouses and not selected_sales_channels:
     filtered_df = df.copy()
 else:
     # Filter data based on selected slicer values
     filtered_df = df[(df['WarehouseCode'].isin(selected_warehouses)) &
-                     (df['SalesChannel'].isin(selected_sales_channels)) &
-                     (df['OrderDate'].isin(selected_another_filter))]
+                     (df['SalesChannel'].isin(selected_sales_channels))]
 
 # Query 1: Warehouse Code vs. Number of Orders (Bar Graph)
 st.subheader('Warehouse Code vs. Number of Orders')
@@ -101,10 +91,3 @@ if 'SalesChannel' in filtered_df.columns:
     st.altair_chart(bubble_chart, use_container_width=True)
 else:
     st.warning("SalesChannel data not available for the selected warehouse.")
-
-
-# In[ ]:
-
-
-
-
