@@ -91,3 +91,4 @@ if 'SalesChannel' in filtered_df.columns:
     st.altair_chart(bubble_chart, use_container_width=True)
 else:
     st.warning("SalesChannel data not available for the selected warehouse.")
+st.write("Note: The code ued is made by help from ChatGPT 3.5")
